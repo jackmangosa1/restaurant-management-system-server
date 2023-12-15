@@ -65,18 +65,19 @@ public class EmployeeDAO {
     }
     return null;
 }
-    public List<Employee> allEmployees(){
-        try{
-            Session ss = HibernateUtil.getSessionFactory().openSession();
-            List<Employee> wareHouses = ss.createQuery("select theEmployee from  Employee theEmployee").list();
-            ss.close();
-            return wareHouses;
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return null;
+    public List<Employee> allEmployees() {
+    List<Employee> employees = null;
+    try{
+        Session ss = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = ss.beginTransaction();
+        Query query = ss.createQuery("SELECT e FROM Employee e JOIN FETCH e.roles");
+        employees = query.list();
+        transaction.commit();
+    } catch (Exception ex) {
+        ex.printStackTrace();
     }
-    
+    return employees;
+}
      public boolean isUsernameExists(String username) {
         try {
             Session ss = HibernateUtil.getSessionFactory().openSession();

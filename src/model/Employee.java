@@ -24,7 +24,7 @@ public class Employee implements Serializable {
     private String firstName;
      @Column(name = "last_name")
     private String lastName;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "employee_role",
         joinColumns = @JoinColumn(name = "employee_id"),
@@ -34,22 +34,27 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "cashier", cascade = CascadeType.ALL)
     private List<CustomerOrder> orders  = new ArrayList<>();
     private String username;
-    private String password;
-    Boolean isActive = true;
-
+    private String password;  
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private EmployeeStatus status;
+    EmployeeStatus employeeStatus = new EmployeeStatus();
     public Employee() {
+    employeeStatus.setStatusId(2);
+    this.status = employeeStatus;
     }
 
     public Employee(Integer employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Employee(Integer employeeId, String firstName, String lastName, String username, String password) {
+    public Employee(Integer employeeId, String firstName, String lastName, String username, String password, EmployeeStatus status) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.status = status;
     }
 
     public Integer getEmployeeId() {
@@ -108,13 +113,14 @@ public class Employee implements Serializable {
         this.password = password;
     }
 
-    public Boolean getIsActive() {
-        return isActive;
+    public EmployeeStatus getStatus() {
+        return status;
     }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
+    public void setStatus(EmployeeStatus status) {
+        this.status = status;
     }
+   
 
   
     

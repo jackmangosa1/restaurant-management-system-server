@@ -56,5 +56,6 @@ Contributor(s):
     <mapping class="model.EmployeeRole"/>
     <mapping class="model.OrderItem"/>
     <mapping class="model.OrderStatus"/>
+    <mapping class="model.EmployeeStatus"/>
   </session-factory>
 </hibernate-configuration>
