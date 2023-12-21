@@ -25,6 +25,7 @@ public class Server {
             theRegistry.rebind("dish",new DishServiceImpl());
             theRegistry.rebind("role", new EmployeeRoleServiceEmpl());
             theRegistry.rebind("employee",new   EmployeeServiceImpl());
+            theRegistry.rebind("employeeStatus", new EmployeeStatusServiceImpl());
             theRegistry.rebind("orderItem", new OrderItemServiceImpl());
             theRegistry.rebind("orderSatus",new OrderStatusServiceImpl());
             System.out.println("Server is running on port 6000");

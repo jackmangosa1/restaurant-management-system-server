@@ -24,7 +24,7 @@ public class Employee implements Serializable {
     private String firstName;
      @Column(name = "last_name")
     private String lastName;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
         name = "employee_role",
         joinColumns = @JoinColumn(name = "employee_id"),
@@ -35,13 +35,11 @@ public class Employee implements Serializable {
     private List<CustomerOrder> orders  = new ArrayList<>();
     private String username;
     private String password;  
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private EmployeeStatus status;
-    EmployeeStatus employeeStatus = new EmployeeStatus();
     public Employee() {
-    employeeStatus.setStatusId(2);
-    this.status = employeeStatus;
+        
     }
 
     public Employee(Integer employeeId) {

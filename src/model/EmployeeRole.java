@@ -6,6 +6,7 @@
 package model;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 /**
@@ -23,6 +24,22 @@ public class EmployeeRole implements Serializable {
     private String roleName;
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     private Set<Employee> employees = new HashSet<>();
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        EmployeeRole other = (EmployeeRole) obj;
+        return roleId == other.roleId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleId);
+    }
 
     public EmployeeRole() {
     }

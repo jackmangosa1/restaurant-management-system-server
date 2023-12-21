@@ -43,4 +43,19 @@ public class DishCategoryServiceImpl extends UnicastRemoteObject implements Dish
     public List<DishCategory> allDishCategories() throws RemoteException {
        return dao.allDishCategories();
     }
+
+    @Override
+    public List<String> allCategoryNames() {
+        return dao.allCategoryNames();
+    }
+
+    @Override
+    public Integer getCategoryIdByName(String categoryName) {
+        return dao.getCategoryIdByName(categoryName);
+    }
+
+    @Override
+    public DishCategory getCategoryByName(String categoryName) {
+       return dao.getCategoryByName(categoryName);
+    }
 }

@@ -76,4 +76,45 @@ public class DishCategoryDAO {
         }
         return null;
     }
+    
+     public List<String> allCategoryNames() {
+    try {
+        Session ss = HibernateUtil.getSessionFactory().openSession();
+        List categoryNames = ss.createQuery("select theDishCategory.categoryName from DishCategory theDishCategory").list();
+        ss.close();
+        return (List<String>) categoryNames;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+    public Integer getCategoryIdByName(String categoryName) {
+    try {
+        Session ss = HibernateUtil.getSessionFactory().openSession();
+        Integer categoryId = (Integer) ss.createQuery("select theDishCategory.categoryId from DishCategory theDishCategory where theDishCategory.categoryName = :categoryName")
+                .setParameter("categoryName", categoryName)
+                .uniqueResult();
+        ss.close();
+        return categoryId;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+    
+    public DishCategory getCategoryByName(String categoryName) {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+
+            DishCategory theDishCategory = (DishCategory) ss.createQuery("select theDishCategory from DishCategory theDishCategory where theDishCategory.categoryName = :categoryName")
+                    .setParameter("categoryName", categoryName)
+                    .uniqueResult();
+            
+            ss.close();
+            return theDishCategory;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

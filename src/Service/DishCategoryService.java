@@ -18,4 +18,7 @@ public interface DishCategoryService extends Remote{
     DishCategory deleteDishCategory(DishCategory dishcategoryObj ) throws RemoteException;
     DishCategory searchDishCategory(DishCategory dishcategoryObj ) throws RemoteException;
     List<DishCategory> allDishCategories() throws RemoteException;
+    List<String> allCategoryNames()throws RemoteException;
+    Integer getCategoryIdByName(String categoryName)throws RemoteException;
+    DishCategory getCategoryByName(String categoryName)throws RemoteException;
 }

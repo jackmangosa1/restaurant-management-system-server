@@ -45,5 +45,20 @@ public class EmployeeStatusServiceImpl extends UnicastRemoteObject implements Em
        return dao.allEmployeeStatuses();
     }
 
+    @Override
+    public List<String> allEmployeeStatusNames() throws RemoteException {
+        return dao.allEmployeeStatusNames();
+    }
+
+    @Override
+    public Integer getEmployeeStatusIdByName(String statusName) throws RemoteException {
+        return dao.getEmployeeStatusIdByName(statusName);
+    }
+
+    @Override
+    public EmployeeStatus getEmployeeStatusByName(String statusName) throws RemoteException {
+       return dao.getEmployeeStatusByName(statusName);
+    }
+
    
 }

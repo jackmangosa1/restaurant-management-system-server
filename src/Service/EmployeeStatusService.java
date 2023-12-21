@@ -12,10 +12,14 @@ import model.*;
  *
  * @author pc
  */
-public interface EmployeeStatusService {
+public interface EmployeeStatusService extends Remote{
     EmployeeStatus recordEmployeeStatus(EmployeeStatus employeeStatusObj ) throws RemoteException;
     EmployeeStatus updateEmployeeStatus(EmployeeStatus employeeStatusObj ) throws RemoteException;
     EmployeeStatus deleteEmployeeStatus(EmployeeStatus employeeStatusObj ) throws RemoteException;
     EmployeeStatus searchEmployeeStatus(EmployeeStatus employeeStatusObj ) throws RemoteException;
     List<EmployeeStatus> allEmployeeStatuses() throws RemoteException;
+    List<String> allEmployeeStatusNames() throws RemoteException;
+    Integer getEmployeeStatusIdByName(String statusName) throws RemoteException;
+    EmployeeStatus getEmployeeStatusByName(String statusName) throws RemoteException;
+    
 }
