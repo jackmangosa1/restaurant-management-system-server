@@ -13,9 +13,10 @@ import model.*;
  * @author pc
  */
 public interface CustomerService extends Remote{
-    Customer recordCustomer(Customer customerObj ) throws RemoteException;
+     Customer recordCustomer(Customer customerObj ) throws RemoteException;
     Customer updateCustomer(Customer customerObj ) throws RemoteException;
     Customer deleteCustomer(Customer customerObj ) throws RemoteException;
     Customer searchCustomer(Customer customerObj ) throws RemoteException;
     List<Customer> allCustomers() throws RemoteException;
+    boolean isPhoneNumberExists(String phoneNumber) throws RemoteException;
 }

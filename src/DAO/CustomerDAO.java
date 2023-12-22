@@ -76,4 +76,19 @@ public class CustomerDAO {
         }
         return null;
     }
+    
+     public boolean isPhoneNumberExists(String phoneNumber) {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+            Query query = ss.createQuery("SELECT COUNT(*) FROM Customer WHERE telephoneNumber = :phoneNumber");
+            query.setParameter("phoneNumber", phoneNumber);
+            Long count = (Long) query.uniqueResult();
+
+            ss.close();
+            return count > 0;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }

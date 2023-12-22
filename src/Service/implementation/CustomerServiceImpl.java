@@ -44,4 +44,9 @@ public class CustomerServiceImpl extends UnicastRemoteObject implements Customer
     public List<Customer> allCustomers() throws RemoteException {
        return dao.allCustomers();
     }
+
+    @Override
+    public boolean isPhoneNumberExists(String phoneNumber) throws RemoteException {
+       return dao.isPhoneNumberExists(phoneNumber);
+    }
 }
