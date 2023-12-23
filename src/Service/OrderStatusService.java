@@ -12,10 +12,11 @@ import model.*;
  *
  * @author pc
  */
-public interface OrderStatusService {
+public interface OrderStatusService extends Remote{
    OrderStatus recordOrderStatus(OrderStatus orderStatusObj ) throws RemoteException;
    OrderStatus updateOrderStatus(OrderStatus orderStatusObj ) throws RemoteException;
    OrderStatus deleteOrderStatus(OrderStatus orderStatusObj ) throws RemoteException;
    OrderStatus searchOrderStatus(OrderStatus orderStatusObj ) throws RemoteException;
-    List<OrderStatus> allOrderStatuses() throws RemoteException;
+   List<OrderStatus> allOrderStatuses() throws RemoteException;
+   OrderStatus getOrderStatusById(int statusId) throws RemoteException;
 }

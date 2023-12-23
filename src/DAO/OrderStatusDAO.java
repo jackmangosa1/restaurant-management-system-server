@@ -77,4 +77,19 @@ public class OrderStatusDAO {
         }
         return null;
     }
+    public OrderStatus getOrderStatusById(int statusId) {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+
+            // Use the provided statusId to retrieve the OrderStatus
+            OrderStatus theOrderStatus = (OrderStatus) ss.get(OrderStatus.class, statusId);
+
+            ss.close();
+            return theOrderStatus;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
 }

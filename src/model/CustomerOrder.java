@@ -24,8 +24,8 @@ public class CustomerOrder implements Serializable {
     private Customer customer;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
-    @Column(name = "order_date")
-    private  LocalDate orderDate = LocalDate.now() ;
+    @Column(name = "order_date", columnDefinition = "DATE")
+    private Date orderDate;
     private double totalAmount;
     @ManyToOne
     @JoinColumn(name = "status_id")
@@ -41,10 +41,21 @@ public class CustomerOrder implements Serializable {
         this.orderId = orderId;
     }
 
-    public CustomerOrder(int orderId, Customer customer, List<OrderItem> orderItems, double totalAmount, OrderStatus status, Employee cashier) {
+    public CustomerOrder(int orderId, Customer customer, List<OrderItem> orderItems, Date orderDate, double totalAmount, OrderStatus status, Employee cashier) {
         this.orderId = orderId;
         this.customer = customer;
         this.orderItems = orderItems;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.cashier = cashier;
+    }
+    
+    public CustomerOrder(Customer customer, List<OrderItem> orderItems, Date orderDate, double totalAmount, OrderStatus status, Employee cashier) {
+        this.orderId = orderId;
+        this.customer = customer;
+        this.orderItems = orderItems;
+        this.orderDate = orderDate;
         this.totalAmount = totalAmount;
         this.status = status;
         this.cashier = cashier;
@@ -74,11 +85,11 @@ public class CustomerOrder implements Serializable {
         this.orderItems = orderItems;
     }
 
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -105,12 +116,6 @@ public class CustomerOrder implements Serializable {
     public void setCashier(Employee cashier) {
         this.cashier = cashier;
     }
-    
 
     
-    
-    
-    
-
-   
 }

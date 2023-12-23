@@ -91,4 +91,22 @@ public class CustomerDAO {
             return false;
         }
     }
+     
+      public Customer searchCustomerByPhoneNumber(String phoneNumber) {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+            Query query = ss.createQuery("FROM Customer WHERE telephoneNumber = :phoneNumber");
+            query.setParameter("phoneNumber", phoneNumber);
+            List<Customer> customers = query.list();
+
+            ss.close();
+
+            if (!customers.isEmpty()) {
+                return customers.get(0);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
