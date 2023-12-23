@@ -91,5 +91,46 @@ public class OrderStatusDAO {
         }
         return null;
     }
+    
+    public List<String> allOrderStatusNames() {
+    try {
+        Session ss = HibernateUtil.getSessionFactory().openSession();
+        List orderNames = ss.createQuery("select theOrderStatus.statusName from OrderStatus theOrderStatus").list();
+        ss.close();
+        return (List<String>) orderNames;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+    public Integer getOrderStatusIdByName(String statusName) {
+    try {
+        Session ss = HibernateUtil.getSessionFactory().openSession();
+        Integer roleId = (Integer) ss.createQuery("select theOrderStatus.statusId from OrderStatus theOrderStatus where theOrderStatus.statusName = :statusName")
+                .setParameter("statusName", statusName)
+                .uniqueResult();
+        ss.close();
+        return roleId;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+    
+    public OrderStatus getOrderStatusByName(String statusName) {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+
+            OrderStatus theOrderStatus = (OrderStatus) ss.createQuery("select theOrderStatus from OrderStatus theOrderStatus where theOrderStatus.statusName = :statusName")
+                    .setParameter("statusName", statusName)
+                    .uniqueResult();
+            
+            ss.close();
+            return theOrderStatus;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
 }

@@ -19,4 +19,7 @@ public interface OrderStatusService extends Remote{
    OrderStatus searchOrderStatus(OrderStatus orderStatusObj ) throws RemoteException;
    List<OrderStatus> allOrderStatuses() throws RemoteException;
    OrderStatus getOrderStatusById(int statusId) throws RemoteException;
+   List<String> allOrderStatusNames()throws RemoteException;
+   Integer getOrderStatusIdByName(String statusName) throws RemoteException;
+   OrderStatus getOrderStatusByName(String statusName) throws RemoteException;
 }

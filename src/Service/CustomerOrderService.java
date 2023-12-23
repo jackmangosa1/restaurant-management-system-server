@@ -18,4 +18,9 @@ public interface CustomerOrderService extends Remote{
     CustomerOrder deleteCustomerOrder(CustomerOrder customerOrderObj ) throws RemoteException;
     CustomerOrder searchCustomerOrder(CustomerOrder customerOrderObj ) throws RemoteException;
     List<CustomerOrder> allCustomerOrders() throws RemoteException;
+    double getTotalSalesForToday()throws RemoteException; 
+    int getTotalReceivedOrders() throws RemoteException; 
+    int getTotalCookingOrders() throws RemoteException; 
+    int getTotalCompletedOrders() throws RemoteException;
+    int getTotalDeliveredOrders()  throws RemoteException;
 }

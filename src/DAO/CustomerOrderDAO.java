@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package DAO;
+import java.util.Date;
 import java.util.List;
 import model.*;
 import org.hibernate.*;
+import org.hibernate.type.StandardBasicTypes;
 /**
  *
  * @author pc
@@ -75,4 +77,60 @@ public class CustomerOrderDAO {
         }
         return null;
     }
+    
+   
+      
+    public double getTotalSalesForToday() {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+
+            Date today = new Date();
+            Query query = ss.createQuery("SELECT SUM(co.totalAmount) FROM CustomerOrder co WHERE co.orderDate = :today");
+            query.setParameter("today", today);
+
+            Double totalSales = (Double) query.uniqueResult();
+            ss.close();
+
+            return totalSales != null ? totalSales : 0.0;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0.0;
+    }
+    
+     public int getTotalReceivedOrders() {
+        return getTotalOrdersByStatus(1); // 1 is the ID for "received"
+    }
+
+    public int getTotalCookingOrders() {
+        return getTotalOrdersByStatus(2); // 2 is the ID for "cooking"
+    }
+
+    public int getTotalCompletedOrders() {
+        return getTotalOrdersByStatus(3); // 3 is the ID for "completed"
+    }
+
+    public int getTotalDeliveredOrders() {
+        return getTotalOrdersByStatus(4); // 4 is the ID for "delivered"
+    }
+
+    private int getTotalOrdersByStatus(int statusId) {
+        try {
+            Session ss = HibernateUtil.getSessionFactory().openSession();
+
+            Query query = ss.createQuery("SELECT COUNT(co) FROM CustomerOrder co WHERE co.status.statusId = :statusId");
+            query.setParameter("statusId", statusId);
+
+            Long totalOrders = (Long) query.uniqueResult();
+            ss.close();
+
+            return totalOrders != null ? totalOrders.intValue() : 0;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
 }

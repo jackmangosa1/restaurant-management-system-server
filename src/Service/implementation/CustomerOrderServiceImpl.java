@@ -45,5 +45,32 @@ public class CustomerOrderServiceImpl extends UnicastRemoteObject implements Cus
     public List<CustomerOrder> allCustomerOrders() throws RemoteException {
        return dao.allCustomerOrders();
     }
+
+    @Override
+    public double getTotalSalesForToday() throws RemoteException {
+       return dao.getTotalSalesForToday();
+    }
+
+    @Override
+    public int getTotalReceivedOrders() throws RemoteException {
+        return dao.getTotalReceivedOrders();
+    }
+
+    @Override
+    public int getTotalCookingOrders() throws RemoteException {
+        return dao.getTotalCookingOrders();
+    }
+
+    @Override
+    public int getTotalCompletedOrders() throws RemoteException {
+        return dao.getTotalCompletedOrders();
+    }
+
+    @Override
+    public int getTotalDeliveredOrders() throws RemoteException {
+       return dao.getTotalDeliveredOrders();
+    }
+
+    
     
 }

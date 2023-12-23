@@ -49,4 +49,19 @@ public class OrderStatusServiceImpl extends UnicastRemoteObject implements Order
     public OrderStatus getOrderStatusById(int statusId) throws RemoteException {
         return dao.getOrderStatusById(statusId);
     }
+
+    @Override
+    public List<String> allOrderStatusNames() throws RemoteException {
+        return dao.allOrderStatusNames();
+    }
+
+    @Override
+    public Integer getOrderStatusIdByName(String statusName) throws RemoteException {
+        return dao.getOrderStatusIdByName(statusName);
+    }
+
+    @Override
+    public OrderStatus getOrderStatusByName(String statusName) throws RemoteException {
+        return dao.getOrderStatusByName(statusName);
+    }
 }
