@@ -116,21 +116,20 @@ public class CustomerOrderDAO {
 
     private int getTotalOrdersByStatus(int statusId) {
         try {
-            Session ss = HibernateUtil.getSessionFactory().openSession();
+        Session ss = HibernateUtil.getSessionFactory().openSession();
 
-            Query query = ss.createQuery("SELECT COUNT(co) FROM CustomerOrder co WHERE co.status.statusId = :statusId");
-            query.setParameter("statusId", statusId);
+        Date today = new Date();
+        Query query = ss.createQuery("SELECT COUNT(co) FROM CustomerOrder co WHERE co.status.statusId = :statusId AND co.orderDate = :today");
+        query.setParameter("statusId", statusId);
+        query.setParameter("today", today);
 
-            Long totalOrders = (Long) query.uniqueResult();
-            ss.close();
+        Long totalOrders = (Long) query.uniqueResult();
+        ss.close();
 
-            return totalOrders != null ? totalOrders.intValue() : 0;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return 0;
+        return totalOrders != null ? totalOrders.intValue() : 0;
+    } catch (Exception ex) {
+        ex.printStackTrace();
     }
-
-
-
+    return 0;
+  }
 }
