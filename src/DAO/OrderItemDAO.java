@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import java.util.Collections;
 import java.util.List;
 import model.OrderItem;
 import org.hibernate.Session;
@@ -77,4 +78,23 @@ public class OrderItemDAO {
         }
         return null;
     }
+    
+   public List<OrderItem> getOrderItemsByOrderId(int orderId) {
+    try {
+        Session ss = HibernateUtil.getSessionFactory().openSession();
+
+        // Use HQL to query for the OrderItems with the given order id
+        List<OrderItem> orderItemList = ss.createQuery("select oi from OrderItem oi where oi.order.id = :orderId")
+                .setParameter("orderId", orderId)
+                .list();
+
+        ss.close();
+
+        return orderItemList;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return Collections.emptyList(); // Return an empty list if there is an error or no items found
+}
+ 
 }

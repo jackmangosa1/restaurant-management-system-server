@@ -17,5 +17,6 @@ public interface OrderItemService extends Remote{
    OrderItem updateOrderItem(OrderItem orderItemObj ) throws RemoteException;
    OrderItem deleteOrderItem(OrderItem orderItemObj ) throws RemoteException;
    OrderItem searchOrderItem(OrderItem orderItemObj ) throws RemoteException;
-    List<OrderItem> allOrderItems() throws RemoteException;
+   List<OrderItem> allOrderItems() throws RemoteException;
+   List<OrderItem> getOrderItemsByOrderId(int orderId) throws RemoteException; 
 }

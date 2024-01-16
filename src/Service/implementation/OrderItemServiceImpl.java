@@ -43,4 +43,9 @@ public class OrderItemServiceImpl extends UnicastRemoteObject implements OrderIt
     public List<OrderItem> allOrderItems() throws RemoteException {
        return dao.allOrderItems();
     }
+
+    @Override
+    public List<OrderItem> getOrderItemsByOrderId(int orderId) throws RemoteException {
+       return dao.getOrderItemsByOrderId(orderId);
+    }
 }
