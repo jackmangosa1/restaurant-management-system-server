@@ -24,6 +24,9 @@ public class EmployeeRole implements Serializable {
     private String roleName;
     @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     private Set<Employee> employees = new HashSet<>();
+    public boolean hasRole(String roleName) {
+        return this.roleName.equals(roleName);
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
